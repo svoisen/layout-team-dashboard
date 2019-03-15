@@ -1,13 +1,6 @@
 .header {
   grid-area: header;
-  background: #333;
+  background: black;
   color: white;
   padding: 8px;
-}
-
-.header h1 {
-  font-size: 1rem;
-  font-weight: normal;
-  margin: 0;
-  padding: 0;
 }

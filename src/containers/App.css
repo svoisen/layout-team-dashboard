@@ -1,6 +1,8 @@
 .app {
+  height: 100vh;
   display: grid;
-  grid-template-columns: 200px auto;
+  grid-template-columns: 240px auto;
+  grid-template-rows: max-content auto max-content;
   grid-template-areas: 
   "header header"
   "sidebar content"
@@ -9,4 +11,6 @@
 
 .content {
   grid-area: content;
+  box-sizing: border-box;
+  padding: 8px;
 }

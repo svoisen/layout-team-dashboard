@@ -1,0 +1,18 @@
+.bugList {
+  overflow-y: scroll;
+  height: 200px;
+  border: 1px solid black;
+}
+
+.bugList table {
+  width: 100%;
+}
+
+.bugList thead th {
+  background: var(--lemon-yellow);
+}
+
+.bugList thead th, .bugList tbody th {
+  position: sticky;
+  top: 0;
+}

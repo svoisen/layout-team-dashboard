@@ -1,5 +1,26 @@
+:root {
+  --lemon-yellow: #fff44f;
+  --light-grey: #e7e5e2;
+  --dark-grey: #959595;
+}
+
 html, body {
   margin: 0;
   font-family: 'Open Sans', sans-serif;
   font-size: 100%;
+}
+
+h1, h2, h3 {
+  font-family: 'Zilla Slab', serif;
+  font-weight: normal;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+h2 {
+  font-size: 1.2rem;
 }

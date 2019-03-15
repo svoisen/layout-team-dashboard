@@ -14,7 +14,7 @@ const App = observer(({ store }) => {
       <Header />
       <Navigation router={ router } />
       <main className="content">
-        <Route path="/" component={ BacklogDashboard } />
+        <Route path="/" component={ () => <BacklogDashboard store={ store} /> } />
       </main>
     </div>
   );
