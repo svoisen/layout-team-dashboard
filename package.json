@@ -1,0 +1,36 @@
+{
+  "name": "layout-team-dashboard",
+  "version": "1.0.0",
+  "description": "Dashboard for the Firefox Platform Layout team.",
+  "scripts": {
+    "start": "webpack-dev-server --hot --open",
+    "build": "webpack -p --progress --colors",
+    "deploy": "npm run build && node node_modules/gh-pages/bin/gh-pages.js -d dist"
+  },
+  "author": "Sean Voisen",
+  "license": "MIT",
+  "dependencies": {
+    "history": "^4.7.2",
+    "mobx": "^5.9.0",
+    "mobx-react": "^5.4.3",
+    "mobx-react-router": "^4.0.5",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3",
+    "react-router-dom": "^4.3.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "css-loader": "^2.1.0",
+    "html-webpack-plugin": "^3.2.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.2.0"
+  }
+}

@@ -1,0 +1,8 @@
+.navigation {
+  grid-area: sidebar;
+}
+
+.navigation ul {
+  list-style: none;
+  text-align: right;
+}

@@ -1,0 +1,25 @@
+{
+  "layoutComponents": [
+    "CSS Animations and Transitions",
+    "CSS Parsing and Computation",
+    "DOM: CSS Object Model",
+    "Layout",
+    "Layout: Block and Inline",
+    "Layout: Columns",
+    "Layout: Flexbox",
+    "Layout: Floats",
+    "Layout: Form Controls",
+    "Layout: Generated Content, Lists, and Counters",
+    "Layout: Grid",
+    "Layout: Images, Video, and HTML Frames",
+    "Layout: Positioned",
+    "Layout: Ruby",
+    "Layout: Scrolling and Overflow",
+    "Layout: Tables",
+    "Layout: Text and Fonts",
+    "Print Preview",
+    "Printing: Output",
+    "Printing: Setup",
+    "SVG"
+  ]
+}

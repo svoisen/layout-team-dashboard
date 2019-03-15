@@ -1,0 +1,12 @@
+.app {
+  display: grid;
+  grid-template-columns: 200px auto;
+  grid-template-areas: 
+  "header header"
+  "sidebar content"
+  "footer footer"
+}
+
+.content {
+  grid-area: content;
+}
