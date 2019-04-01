@@ -21,5 +21,26 @@
     "Printing: Output",
     "Printing: Setup",
     "SVG"
+  ],
+  "team": [
+    "emilio",
+    "svoisen",
+    "heycam",
+    "dholbert",
+    "jfkthame",
+    "jwatt",
+    "mats",
+    "TYLin",
+    "boris",
+    "hiro",
+    "birtles",
+    "kamidphish",
+    "rhunt"
+  ],
+  "quarters": [
+    "2019q1",
+    "2019q2",
+    "2019q3",
+    "2019q4"
   ]
 }

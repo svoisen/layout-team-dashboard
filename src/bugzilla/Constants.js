@@ -2,6 +2,9 @@ const FIELD_ID = 'id';
 const FIELD_SUMMARY = 'summary';
 const FIELD_COMPONENT = 'component';
 const FIELD_IS_OPEN = 'is_open';
+const FIELD_WHITEBOARD = 'whiteboard';
+const FIELD_ASSIGNEE = 'assigned_to';
+const FIELD_ASSIGNEE_DETAIL = 'assigned_to_detail';
 const STATUS_NEW = 'NEW';
 const STATUS_ASSIGNED = 'ASSIGNED';
 const STATUS_REOPENED = 'REOPENED';
@@ -13,6 +16,9 @@ export {
   FIELD_SUMMARY,
   FIELD_COMPONENT,
   FIELD_IS_OPEN,
+  FIELD_WHITEBOARD,
+  FIELD_ASSIGNEE,
+  FIELD_ASSIGNEE_DETAIL,
   STATUS_NEW,
   STATUS_ASSIGNED,
   STATUS_REOPENED,

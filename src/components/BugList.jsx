@@ -1,16 +1,38 @@
 import './BugList.css';
 import React from 'react';
 import { observer } from 'mobx-react';
+import { FIELD_ID } from '../bugzilla/Constants';
 
 function makeLink(bugId) {
   return `https://bugzilla.mozilla.org/show_bug.cgi?id=${bugId}`;
 }
 
-const BugList = observer(({ bugs }) => {
-  const rows = bugs.map(bug => {
+const BugList = observer(({ bugs, columns }) => {
+  const headers = columns.map((column, idx) => {
     return (
-      <tr>
-        <td><a href={ makeLink(bug.id) }>{ bug.id }</a></td>
+      <th key={ `column_${idx}` }>{ column.title }</th>
+    )
+  });
+
+  const rows = bugs.map((bug, idx) => {
+    const cells = columns.map((column, idx) => {
+      let contents;
+      if (typeof column.property === 'string' && column.property === FIELD_ID) {
+        contents = <a href={ makeLink(bug[column.property]) }>{ bug[column.property] }</a>
+      } else if (typeof column.property === 'function') {
+        contents = column.property(bug);
+      } else {
+        contents = bug[column.property];
+      }
+
+      return (
+        <td key={ `column_${idx}` }>{ contents }</td>
+      )
+    });
+
+    return (
+      <tr key={ `bug_${idx}` }>
+        { cells }
       </tr>
     );
   });
@@ -20,7 +42,7 @@ const BugList = observer(({ bugs }) => {
       <table>
         <thead>
           <tr>
-            <th>ID</th>
+            { headers }
           </tr>
         </thead>
         <tbody>
