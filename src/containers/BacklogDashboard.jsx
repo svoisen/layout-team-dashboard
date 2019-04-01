@@ -3,7 +3,7 @@ import React from 'react';
 import { observer } from 'mobx-react';
 import BugList from '../components/BugList';
 import { FIELD_ID, FIELD_SUMMARY, FIELD_COMPONENT, FIELD_WHITEBOARD, FIELD_ASSIGNEE_DETAIL } from '../bugzilla';
-import { extractQuarter, prettyPrintQuarter } from '../util/WhiteboardParsing';
+import { extractQuarter, prettyPrintQuarter, extractTarget } from '../util/WhiteboardParsing';
 import { createFilterActions } from '../actions/FilterActions';
 
 const config = require('../config.json');
@@ -62,7 +62,7 @@ const BacklogDashboard = observer(({ store }) => {
           { title: 'Component', property: FIELD_COMPONENT },
           { title: 'Assignee', property: bug => bug[FIELD_ASSIGNEE_DETAIL]['nick'] },
           { title: 'Quarter', property: bug => extractQuarter(bug[FIELD_WHITEBOARD]) },
-          { title: 'Target Release', property: FIELD_WHITEBOARD },
+          { title: 'Target Release', property: bug => extractTarget(bug[FIELD_WHITEBOARD]) }
         ] } />
     </div>
   )
