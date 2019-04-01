@@ -18,13 +18,20 @@ function checkResponse(response) {
   return error;
 }
 
+function fetchBug(id) {
+  const URL = new URL(BUGZILLA_API_URL + `/${id}`);
+  return fetch(url)
+    .then(checkResponse)
+    .then(parseJSON);
+}
+
 /**
  * 
  * @param {*} query 
  *  @param query.fields
  *  @param query.components 
  */
-function fetchBugs(query) {
+function searchBugs(query) {
   const url = new URL(BUGZILLA_API_URL);
   url.searchParams.append(QUERY_PARAM_FIELDS, query.fields || []);
 
@@ -44,5 +51,6 @@ function fetchBugs(query) {
 }
 
 export {
-  fetchBugs
+  searchBugs,
+  fetchBug
 }

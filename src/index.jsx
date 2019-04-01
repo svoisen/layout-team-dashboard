@@ -3,22 +3,23 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './containers/App';
 import { Router } from 'react-router';
-import { createBrowserHistory } from 'history';
+import { createHashHistory } from 'history';
 import { createStore } from './stores/Store';
 import { syncHistoryWithStore } from 'mobx-react-router';
 import { autorun } from '../node_modules/mobx/lib/mobx';
-import { ROUTE_BACKLOG } from './Routes';
+import { ROUTE_BACKLOG, ROUTE_FISSION } from './Routes';
 import { createFetchActions } from './actions/FetchActions';
 import { createFilterActions } from './actions/FilterActions';
 
-const browserHistory = createBrowserHistory();
+const hashHistory = createHashHistory();
 const store = createStore();
-const history = syncHistoryWithStore(browserHistory, store.router);
-const { fetchBacklog } = createFetchActions(store);
+const history = syncHistoryWithStore(hashHistory, store.router);
+const { fetchBacklog, fetchFissionBacklog } = createFetchActions(store);
 const { updateFiltersFromSearchParams } = createFilterActions(store);
 
 const routeActionMap = {};
 routeActionMap[ROUTE_BACKLOG] = fetchBacklog;
+routeActionMap[ROUTE_FISSION] = fetchFissionBacklog;
 
 function initialize() {
   ReactDOM.render(
@@ -31,8 +32,8 @@ function initialize() {
 
 autorun(() => {
   const location = store.router.location;
-  const unprefixedHash = location.hash.length > 0 ? location.hash.substring(1) : 'backlog';
-  const action = routeActionMap[unprefixedHash];
+  const unprefixedPath = location.pathname.length === 0 ? ROUTE_BACKLOG : location.pathname.substring(1);
+  const action = routeActionMap[unprefixedPath];
   if (action && typeof action === 'function') {
     action();
   }

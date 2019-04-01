@@ -5,6 +5,7 @@ const FIELD_IS_OPEN = 'is_open';
 const FIELD_WHITEBOARD = 'whiteboard';
 const FIELD_ASSIGNEE = 'assigned_to';
 const FIELD_ASSIGNEE_DETAIL = 'assigned_to_detail';
+const FIELD_FLAGS = 'flags';
 const STATUS_NEW = 'NEW';
 const STATUS_ASSIGNED = 'ASSIGNED';
 const STATUS_REOPENED = 'REOPENED';
@@ -19,6 +20,7 @@ export {
   FIELD_WHITEBOARD,
   FIELD_ASSIGNEE,
   FIELD_ASSIGNEE_DETAIL,
+  FIELD_FLAGS,
   STATUS_NEW,
   STATUS_ASSIGNED,
   STATUS_REOPENED,

@@ -13,7 +13,9 @@ function createFilterActions(store) {
   function applyFilters(filters) {
     const search = new URLSearchParams();
     search.set('q', filters.quarters.join(','));
-    store.router.push('?' + search.toString());
+    store.router.push({
+      search: '?' + search.toString()
+    });
   }
 
   function updateFiltersFromSearchParams(params) {

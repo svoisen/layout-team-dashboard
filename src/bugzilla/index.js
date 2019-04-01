@@ -1,4 +1,4 @@
-import { fetchBugs } from './Bugzilla';
+import { searchBugs } from './Bugzilla';
 import {
   FIELD_ID,
   FIELD_COMPONENT,
@@ -10,7 +10,7 @@ import {
 } from './Constants';
 
 export {
-  fetchBugs,
+  searchBugs,
   FIELD_ID,
   FIELD_COMPONENT,
   FIELD_IS_OPEN,
