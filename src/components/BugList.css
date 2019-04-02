@@ -7,6 +7,7 @@
 .bugList table {
   width: 100%;
   font-size: 0.875rem;
+  border-spacing: 2px;
 }
 
 .bugList thead th {
@@ -15,7 +16,7 @@
 
 .bugList thead th, .bugList tbody th {
   position: sticky;
-  top: 0;
+  top: 2px;
 }
 
 .bugList tbody tr:nth-child(even) {
@@ -27,4 +28,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   padding: 4px;
+}
+
+.bugList tbody td.closed {
+  text-decoration: line-through;
 }

@@ -1,7 +1,7 @@
 import './BugList.css';
 import React from 'react';
 import { observer } from 'mobx-react';
-import { FIELD_ID } from '../bugzilla/Constants';
+import { FIELD_ID, FIELD_IS_OPEN } from '../bugzilla/Constants';
 
 function makeLink(bugId) {
   return `https://bugzilla.mozilla.org/show_bug.cgi?id=${bugId}`;
@@ -17,6 +17,13 @@ const BugList = observer(({ bugs, columns }) => {
   const rows = bugs.map((bug, idx) => {
     const cells = columns.map((column, idx) => {
       let contents;
+      const classNames = [];
+      if (bug[FIELD_IS_OPEN]) {
+        classNames.push('open');
+      } else {
+        classNames.push('closed');
+      }
+
       if (typeof column.property === 'string' && column.property === FIELD_ID) {
         contents = <a href={ makeLink(bug[column.property]) }>{ bug[column.property] }</a>
       } else if (typeof column.property === 'function') {
@@ -26,7 +33,7 @@ const BugList = observer(({ bugs, columns }) => {
       }
 
       return (
-        <td key={ `column_${idx}` }>{ contents }</td>
+        <td key={ `column_${idx}` } className={ classNames.join(' ') }>{ contents }</td>
       )
     });
 
