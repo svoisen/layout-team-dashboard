@@ -6,6 +6,7 @@ const FIELD_WHITEBOARD = 'whiteboard';
 const FIELD_ASSIGNEE = 'assigned_to';
 const FIELD_ASSIGNEE_DETAIL = 'assigned_to_detail';
 const FIELD_FLAGS = 'flags';
+const FIELD_FISSION_MILESTONE = 'cf_fission_milestone';
 const STATUS_NEW = 'NEW';
 const STATUS_ASSIGNED = 'ASSIGNED';
 const STATUS_REOPENED = 'REOPENED';
@@ -21,6 +22,7 @@ export {
   FIELD_ASSIGNEE,
   FIELD_ASSIGNEE_DETAIL,
   FIELD_FLAGS,
+  FIELD_FISSION_MILESTONE,
   STATUS_NEW,
   STATUS_ASSIGNED,
   STATUS_REOPENED,

@@ -18,11 +18,42 @@ function checkResponse(response) {
   return error;
 }
 
+/**
+ * Fetch a specific bug. 
+ * @param {number} id 
+ */
 function fetchBug(id) {
-  const URL = new URL(BUGZILLA_API_URL + `/${id}`);
-  return fetch(url)
-    .then(checkResponse)
-    .then(parseJSON);
+  const url = new URL(BUGZILLA_API_URL + `/${id}`);
+  return runFetch(url);
+}
+
+/**
+ * Fetch a collection of bugs. 
+ * @param {array} ids 
+ */
+function fetchBugs(ids) {
+  const url = new URL(BUGZILLA_API_URL + '?id=' + ids.join(','));
+  return runFetch(url)
+}
+
+/**
+ * Fetch all of the dependencies of a given bug.
+ * @param {number} id 
+ */
+function fetchBugDependencies(id) {
+  return fetchBug(id)
+    .then(data => {
+      if (data.bugs && data.bugs.length > 0) {
+        const dependsOn = data.bugs[0].depends_on;
+        if (Array.isArray(dependsOn)) {
+          return fetchBugs(dependsOn);
+        }
+
+        return Promise.error(`No dependencies found for bug ${id}`);
+      } 
+
+      return Promise.error(`No bug found with ID ${id}`);
+    });
 }
 
 /**
@@ -45,6 +76,10 @@ function searchBugs(query) {
     url.searchParams.append(QUERY_PARAM_WHITEBOARD, query.whiteboard);
   }
 
+  return runFetch(url);
+}
+
+function runFetch(url) {
   return fetch(url)
     .then(checkResponse)
     .then(parseJSON);
@@ -52,5 +87,7 @@ function searchBugs(query) {
 
 export {
   searchBugs,
-  fetchBug
+  fetchBug,
+  fetchBugs,
+  fetchBugDependencies
 }
