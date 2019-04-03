@@ -47,16 +47,16 @@ select {
   margin-top: 8px;
 }
 
-.dashboardFilters .group {
+.dashboardFilters .filter {
   display: inline-block;
   margin-right: 8px;
 }
 
-.dashboardFilters .group label {
+.dashboardFilters .filter label {
   font-size: 0.875rem;
 }
 
-.dashboardFilters .group__vertical label {
+.dashboardFilters .filter__vertical label {
   display: block;
   margin-bottom: 4px;
 }

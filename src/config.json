@@ -45,5 +45,11 @@
   ],
   "metabugs": {
     "fission": 1495940
-  }
+  },
+  "milestones": [
+    "M1",
+    "M2",
+    "M3",
+    "M4"
+  ]
 }

@@ -5,6 +5,9 @@ import BugList from '../components/BugList';
 import { FIELD_ID, FIELD_SUMMARY, FIELD_COMPONENT, FIELD_WHITEBOARD, FIELD_ASSIGNEE_DETAIL } from '../bugzilla';
 import { extractQuarter, prettyPrintQuarter, extractTarget } from '../util/WhiteboardParsing';
 import { createFilterActions } from '../actions/FilterActions';
+import QuarterSelectionFilter from '../components/QuarterSelectionFilter';
+import ComponentSelectionFilter from '../components/ComponentSelectionFilter';
+import AssigneeSelectionFilter from '../components/AssigneeSelectionFilter';
 
 const config = require('../config.json');
 
@@ -21,24 +24,9 @@ const BacklogDashboard = observer(({ store }) => {
       <details className="dashboardFilters">
         <summary className="title">Filters</summary>
         <div className="contents">
-          <div className="group group__vertical">
-            <label htmlFor="filterQuarter">Quarter</label>
-            <select multiple defaultValue={ filters.quarters } id="filterQuarter">
-              { config.quarters.map(quarter => <option key={ quarter } value={ quarter }>{ prettyPrintQuarter(quarter) }</option>) }
-            </select>
-          </div>
-          <div className="group group__vertical">
-            <label htmlFor="filterComponent">Component</label>
-            <select multiple id="filterComponent">
-              { config.layoutComponents.map((component, idx) => <option key={ `component_${idx}` } value={ component }>{ component }</option>)}
-            </select>
-          </div>
-          <div className="group group__vertical">
-            <label htmlFor="filterAssignee">Assignee</label>
-            <select multiple defaultValue={ filters.assignees } id="filterAssignee">
-              { config.team.sort().map((nick, idx) => <option key={ `assignee_${idx}` } value={ nick }>{ nick }</option>)}
-            </select>
-          </div>
+          <QuarterSelectionFilter selectedQuarters={ filters.quarters } availableQuarters={ config.quarters } />
+          <ComponentSelectionFilter availableComponents={ config.layoutComponents.sort() } />
+          <AssigneeSelectionFilter availableAssignees={ config.team.sort() } selectedAssignees={ filters.assignees } />
           <div className="group group__vertical">
             <label htmlFor="filterTarget">Target</label>
             <select multiple id="filterTarget">
