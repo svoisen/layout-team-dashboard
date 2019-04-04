@@ -1,13 +1,12 @@
 import React from 'react';
+import Multiselect from './Multiselect';
 
 function ComponentSelectionFilter(props) {
-  const { selectedComponents, availableComponents } = props;
+  const { selectedComponents, availableComponents, onChange } = props;
   return (
     <div className="filter filter__vertical">
       <label htmlFor="filterComponent">Component</label>
-      <select multiple id="filterComponent">
-        { availableComponents.map((component, idx) => <option key={ `component_${idx}` } value={ component }>{ component }</option>)}
-      </select>
+      <Multiselect id="filterComponent" availableValues={ availableComponents } selectedValues={ selectedComponents } onChange={ onChange } />
     </div>
   );
 }

@@ -5,8 +5,12 @@ function createStore() {
   return {
     bugs: observable([]),
     filters: observable({
+      dirty: false,
       quarters: [],
-      assignees: []
+      assignees: [],
+      targets: [],
+      components: [],
+      milestones: []
     }),
     router: new RouterStore()
   };

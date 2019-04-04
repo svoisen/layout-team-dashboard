@@ -8,36 +8,37 @@ import { createFilterActions } from '../actions/FilterActions';
 import QuarterSelectionFilter from '../components/QuarterSelectionFilter';
 import ComponentSelectionFilter from '../components/ComponentSelectionFilter';
 import AssigneeSelectionFilter from '../components/AssigneeSelectionFilter';
+import TargetSelectionFilter from '../components/TargetSelectionFilter';
 
 const config = require('../config.json');
 
-function multiSelectValues(id) {
-  return Array.from(document.getElementById(id).selectedOptions).map(option => option.value);
-}
-
 const BacklogDashboard = observer(({ store }) => {
   const filters = store.filters;
-  const { applyFilters } = createFilterActions(store);
+  const { applyFilters, updateFilter } = createFilterActions(store);
   return (
     <div className="dashboard backlogDashboard">
       <h2>Backlog</h2>
       <details className="dashboardFilters">
         <summary className="title">Filters</summary>
         <div className="contents">
-          <QuarterSelectionFilter selectedQuarters={ filters.quarters } availableQuarters={ config.quarters } />
-          <ComponentSelectionFilter availableComponents={ config.layoutComponents.sort() } />
-          <AssigneeSelectionFilter availableAssignees={ config.team.sort() } selectedAssignees={ filters.assignees } />
-          <div className="group group__vertical">
-            <label htmlFor="filterTarget">Target</label>
-            <select multiple id="filterTarget">
-              { [67, 68, 69, 70].map(target => <option key={ `target_${target}` } value={ target }>{ `Fx ${target}` }</option>) }
-            </select>
-          </div>
+          <QuarterSelectionFilter
+            selectedQuarters={ filters.quarters }
+            availableQuarters={ config.quarters.sort() }
+            onChange={ selected => updateFilter('quarters', selected) } />
+          <ComponentSelectionFilter
+            availableComponents={ config.layoutComponents.sort() }
+            selectedComponents={ filters.components }
+            onChange={ selected => updateFilter('components', selected) } />
+          <AssigneeSelectionFilter
+            availableAssignees={ config.team.sort() }
+            selectedAssignees={ filters.assignees }
+            onChange={ selected => updateFilter('assignees', selected) } />
+          <TargetSelectionFilter
+            availableTargets={ config.targets.sort() }
+            selectedTargets={ filters.targets }
+            onChange={ selected => updateFilter('targets', selected) } />
           <div className="controls">
-            <button onClick={ () => applyFilters({
-              quarters: multiSelectValues('filterQuarter'),
-              assignees: multiSelectValues('filterAssignee')
-            }) }>Apply</button>
+            <button disabled={ !store.filters.dirty } onClick={ applyFilters }>Apply</button>
             <button>Clear All</button>
           </div>
         </div>

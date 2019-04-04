@@ -1,41 +1,43 @@
-const config = require('../config.json');
-
 function extractArrayFromSearchParams(params, varName) {
-  let arr = params.get(varName);
+  const arr = params.getAll(varName);
   if (arr) {
-    return arr.split(',');
+    return arr;
   }
 
   return [];
 }
 
 function createFilterActions(store) {
-  function applyFilters(filters) {
+  function applyFilters() {
+    if (!store.filters.dirty) {
+      return;
+    }
+
     const search = new URLSearchParams();
-    search.set('q', filters.quarters.join(','));
+    store.filters.quarters.forEach(quarter => search.append('q', quarter));
+    store.filters.assignees.forEach(assignee => search.append('a', assignee));
+    store.filters.components.forEach(component => search.append('c', component));
+    store.filters.targets.forEach(target => search.append('t', target));
+
+    store.filters.dirty = false;
     store.router.push({
       search: '?' + search.toString()
     });
   }
 
-  function updateFiltersFromSearchParams(params) {
-    const quarters = extractArrayFromSearchParams(params, 'q');
-    if (quarters.length === 0) {
-      store.filters.quarters = config.quarters.slice();
-    } else {
-      store.filters.quarters = quarters;
-    }
+  function updateFilter(filterName, value) {
+    store.filters[filterName].replace(value);
+    store.filters.dirty = true;
+  }
 
-    const assignees = extractArrayFromSearchParams(params, 'a');
-    if (assignees.length === 0) {
-      store.filters.assignees = config.team.slice();
-    } else {
-      store.filters.assignees = assignees;
-    }
+  function updateFiltersFromSearchParams(params) {
+    store.filters.quarters.replace(extractArrayFromSearchParams(params, 'q'));
+    store.filters.assignees.replace(extractArrayFromSearchParams(params, 'a'));
   }
 
   return {
     updateFiltersFromSearchParams,
+    updateFilter,
     applyFilters
   }
 }

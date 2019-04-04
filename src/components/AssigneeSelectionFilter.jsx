@@ -1,13 +1,14 @@
 import React from 'react';
+import Multiselect from './Multiselect';
 
 function AssigneeSelectionFilter(props) {
-  const { availableAssignees, selectedAssignees } = props;
+  const { availableAssignees, selectedAssignees, onChange } = props;
+  const allAssignees = ['nobody'].concat(availableAssignees.sort());
+
   return (
     <div className="filter filter__vertical">
       <label htmlFor="filterAssignee">Assignee</label>
-      <select multiple defaultValue={ selectedAssignees } id="filterAssignee">
-        { ['nobody'].concat(availableAssignees.sort()).map(nick => <option key={ `assignee_${nick}` } value={ nick }>{ nick }</option>)}
-      </select>
+      <Multiselect id="filterAssignee" onChange={ onChange } selectedValues={ selectedAssignees } availableValues={ allAssignees } />
     </div>
   );
 }

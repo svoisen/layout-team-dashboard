@@ -34,14 +34,11 @@ autorun(() => {
   const location = store.router.location;
   const unprefixedPath = location.pathname.length === 0 ? ROUTE_BACKLOG : location.pathname.substring(1);
   const action = routeActionMap[unprefixedPath];
+  updateFiltersFromSearchParams(new URLSearchParams(location.search));
+
   if (action && typeof action === 'function') {
     action();
   }
-});
-
-autorun(() => {
-  const searchParams = new URLSearchParams(store.router.location.search);
-  updateFiltersFromSearchParams(searchParams);
 });
 
 initialize();
