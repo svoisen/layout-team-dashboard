@@ -17,7 +17,7 @@ function prettyPrintQuarter(dateStr) {
 function extractTarget(str) {
   const res = str.match(regex)
   if (res && res.length > 2 && res[2]) {
-    return `Fx ${res[2]}`;
+    return `${res[2]}`;
   }
 
   return "None";

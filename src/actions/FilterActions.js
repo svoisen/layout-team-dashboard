@@ -8,6 +8,10 @@ function extractArrayFromSearchParams(params, varName) {
 }
 
 function createFilterActions(store) {
+  function setFiltersOpen(open) {
+    store.filters.open = open;
+  }
+
   function applyFilters() {
     if (!store.filters.dirty) {
       return;
@@ -35,10 +39,16 @@ function createFilterActions(store) {
     store.filters.assignees.replace(extractArrayFromSearchParams(params, 'a'));
   }
 
+  function clearFilters() {
+    store.router.push({search: ''});
+  }
+
   return {
     updateFiltersFromSearchParams,
     updateFilter,
-    applyFilters
+    applyFilters,
+    clearFilters,
+    setFiltersOpen
   }
 }
 

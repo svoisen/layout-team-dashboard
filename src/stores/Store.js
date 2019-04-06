@@ -5,6 +5,7 @@ function createStore() {
   return {
     bugs: observable([]),
     filters: observable({
+      open: false,
       dirty: false,
       quarters: [],
       assignees: [],

@@ -6,7 +6,7 @@ import { Router } from 'react-router';
 import { createHashHistory } from 'history';
 import { createStore } from './stores/Store';
 import { syncHistoryWithStore } from 'mobx-react-router';
-import { autorun } from '../node_modules/mobx/lib/mobx';
+import { autorun, reaction } from '../node_modules/mobx/lib/mobx';
 import { ROUTE_BACKLOG, ROUTE_FISSION } from './Routes';
 import { createFetchActions } from './actions/FetchActions';
 import { createFilterActions } from './actions/FilterActions';
@@ -26,11 +26,12 @@ function initialize() {
     <Router history={ history }>
       <App store={ store } />
     </Router>,
-    document.getElementById('container')
+    document.getElementById('container'),
+    updateFromLocationChange
   );
 }
 
-autorun(() => {
+function updateFromLocationChange() {
   const location = store.router.location;
   const unprefixedPath = location.pathname.length === 0 ? ROUTE_BACKLOG : location.pathname.substring(1);
   const action = routeActionMap[unprefixedPath];
@@ -39,6 +40,7 @@ autorun(() => {
   if (action && typeof action === 'function') {
     action();
   }
-});
+}
 
+reaction(() => store.router.location, updateFromLocationChange);
 initialize();

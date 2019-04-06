@@ -3,6 +3,7 @@ const BUGZILLA_API_URL = 'https://bugzilla.mozilla.org/rest/bug';
 const QUERY_PARAM_FIELDS = 'include_fields';
 const QUERY_PARAM_COMPONENT = 'component';
 const QUERY_PARAM_WHITEBOARD = 'whiteboard';
+const QUERY_PARAM_ASSIGNEE = 'assigned_to';
 
 function parseJSON(response) {
   return response.json();
@@ -69,6 +70,12 @@ function searchBugs(query) {
   if (query.components) {
     query.components.forEach(component => {
       url.searchParams.append(QUERY_PARAM_COMPONENT, component);
+    });
+  }
+
+  if (query.assignees) {
+    query.assignees.forEach(assignee => {
+      url.searchParams.append(QUERY_PARAM_ASSIGNEE, assignee);
     });
   }
 

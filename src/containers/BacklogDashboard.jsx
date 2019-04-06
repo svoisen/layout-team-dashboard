@@ -3,7 +3,7 @@ import React from 'react';
 import { observer } from 'mobx-react';
 import BugList from '../components/BugList';
 import { FIELD_ID, FIELD_SUMMARY, FIELD_COMPONENT, FIELD_WHITEBOARD, FIELD_ASSIGNEE_DETAIL } from '../bugzilla';
-import { extractQuarter, prettyPrintQuarter, extractTarget } from '../util/WhiteboardParsing';
+import { extractQuarter, extractTarget } from '../util/WhiteboardParsing';
 import { createFilterActions } from '../actions/FilterActions';
 import QuarterSelectionFilter from '../components/QuarterSelectionFilter';
 import ComponentSelectionFilter from '../components/ComponentSelectionFilter';
@@ -14,11 +14,11 @@ const config = require('../config.json');
 
 const BacklogDashboard = observer(({ store }) => {
   const filters = store.filters;
-  const { applyFilters, updateFilter } = createFilterActions(store);
+  const { applyFilters, updateFilter, clearFilters, setFiltersOpen } = createFilterActions(store);
   return (
     <div className="dashboard backlogDashboard">
       <h2>Backlog</h2>
-      <details className="dashboardFilters">
+      <details className="dashboardFilters" open={ store.filters.open } onToggle={ event => setFiltersOpen(event.target.open) }>
         <summary className="title">Filters</summary>
         <div className="contents">
           <QuarterSelectionFilter
@@ -39,7 +39,7 @@ const BacklogDashboard = observer(({ store }) => {
             onChange={ selected => updateFilter('targets', selected) } />
           <div className="controls">
             <button disabled={ !store.filters.dirty } onClick={ applyFilters }>Apply</button>
-            <button>Clear All</button>
+            <button className="clear" onClick={ clearFilters }>Clear All</button>
           </div>
         </div>
       </details>

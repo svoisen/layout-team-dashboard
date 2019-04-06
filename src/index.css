@@ -2,6 +2,9 @@
   --lemon-yellow: #fff44f;
   --light-grey: #e7e5e2;
   --dark-grey: #959595;
+  --dark-blue: #00458b;
+  --warm-red: #ff4f5e;
+  --neon-blue: #00ffff;
 }
 
 html, body {
@@ -29,6 +32,28 @@ select {
   font-family: 'Open Sans', sans-serif;
   font-size: 0.75rem;
   border: 1px solid var(--dark-grey);
+}
+
+a {
+  color: var(--dark-blue);
+}
+
+button {
+  background: var(--dark-grey);
+  color: white;
+  border: 1px solid black;
+  font-size: 0.75rem;
+  font-family: 'Open Sans', sans-serif;
+  padding: 4px 8px 4px 8px;
+  border-radius: 2px;
+}
+
+button:disabled {
+  opacity: 0.33;
+}
+
+button.clear {
+  background: var(--warm-red);
 }
 
 .dashboardFilters {
@@ -61,7 +86,15 @@ select {
   margin-bottom: 4px;
 }
 
+.dashboardFilters .controls {
+  margin-top: 8px;
+}
+
+.dashboardFilters .controls button {
+  margin-right: 8px;
+}
+
 .dashboard h2 {
   font-size: 1.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 8px;
 }
