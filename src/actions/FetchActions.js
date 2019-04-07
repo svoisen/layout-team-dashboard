@@ -3,18 +3,51 @@ import { FIELD_ID, FIELD_COMPONENT, FIELD_SUMMARY, FIELD_WHITEBOARD, FIELD_ASSIG
 
 const config = require('../config.json');
 
+function buildWhiteboardRegex(quarters, targets) {
+  let unassignedIdx = -1;
+  let regexp = config.whiteboardPrefix;
+  if (quarters && quarters.length > 0) {
+    unassignedIdx = quarters.indexOf('---');
+    if (unassignedIdx > -1) {
+      quarters = quarters.splice(unassignedIdx, 1);
+    }
+    regexp += '\\:(' + quarters.join('|') + ')';
+    if (unassignedIdx > -1) {
+      regexp += '?'
+    }
+  } else {
+    regexp += '(\\:[0-9A-Za-z]+)?';
+  }
+
+  unassignedIdx = -1;
+  if (targets && targets.length > 0) {
+    unassignedIdx = targets.indexOf('---');
+    if (unassignedIdx > -1) {
+      targets = targers.splice(unassignedIdx, 1);
+    }
+    regexp += '\\:(' + targets.join('|') + ')';
+  } else {
+    regexp += '(\\:[0-9]+)?';
+  }
+
+  regexp += '\\]';
+
+  return regexp;
+}
+
 function createFetchActions(store) {
   function fetchBacklog() {
     console.log('Fetching backlog');
     const filters = store.filters;
     const assignees = filters.assignees;
     const components = filters.components.length > 0 ? filters.components : config.layoutComponents;
+    const whiteboard = buildWhiteboardRegex(filters.quarters, filters.targets);
     store.bugs.clear();
 
     searchBugs({
       fields: [FIELD_ID, FIELD_COMPONENT, FIELD_SUMMARY, FIELD_WHITEBOARD, FIELD_ASSIGNEE, FIELD_ASSIGNEE_DETAIL, FIELD_IS_OPEN],
       components: components,
-      whiteboard: '[layout:backlog',
+      whiteboard: whiteboard,
       assignees: assignees
     }).then(data => {
       store.bugs.replace(data.bugs);

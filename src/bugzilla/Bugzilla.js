@@ -3,6 +3,7 @@ const BUGZILLA_API_URL = 'https://bugzilla.mozilla.org/rest/bug';
 const QUERY_PARAM_FIELDS = 'include_fields';
 const QUERY_PARAM_COMPONENT = 'component';
 const QUERY_PARAM_WHITEBOARD = 'whiteboard';
+const QUERY_PARAM_WHITEBOARD_TYPE = 'status_whiteboard_type';
 const QUERY_PARAM_ASSIGNEE = 'assigned_to';
 
 function parseJSON(response) {
@@ -79,10 +80,17 @@ function searchBugs(query) {
     });
   }
 
-  if (query.whiteboard && query.whiteboard.length > 0) {
-    url.searchParams.append(QUERY_PARAM_WHITEBOARD, query.whiteboard);
+  // if (query.whiteboard && query.whiteboard.length > 0) {
+  //   query.whiteboard.forEach(whiteboard => {
+  //     url.searchParams.append(QUERY_PARAM_WHITEBOARD, whiteboard);
+  //   });
+  // }
+
+  if (query.whiteboard) {
+    url.searchParams.set(QUERY_PARAM_WHITEBOARD, query.whiteboard);
   }
 
+  url.searchParams.append(QUERY_PARAM_WHITEBOARD_TYPE, 'regexp');
   return runFetch(url);
 }
 

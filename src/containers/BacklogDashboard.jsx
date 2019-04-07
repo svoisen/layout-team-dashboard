@@ -21,10 +21,6 @@ const BacklogDashboard = observer(({ store }) => {
       <details className="dashboardFilters" open={ store.filters.open } onToggle={ event => setFiltersOpen(event.target.open) }>
         <summary className="title">Filters</summary>
         <div className="contents">
-          <QuarterSelectionFilter
-            selectedQuarters={ filters.quarters }
-            availableQuarters={ config.quarters.sort() }
-            onChange={ selected => updateFilter('quarters', selected) } />
           <ComponentSelectionFilter
             availableComponents={ config.layoutComponents.sort() }
             selectedComponents={ filters.components }
@@ -33,6 +29,10 @@ const BacklogDashboard = observer(({ store }) => {
             availableAssignees={ config.team.sort() }
             selectedAssignees={ filters.assignees }
             onChange={ selected => updateFilter('assignees', selected) } />
+          <QuarterSelectionFilter
+            selectedQuarters={ filters.quarters }
+            availableQuarters={ config.quarters.sort() }
+            onChange={ selected => updateFilter('quarters', selected) } />
           <TargetSelectionFilter
             availableTargets={ config.targets.sort() }
             selectedTargets={ filters.targets }

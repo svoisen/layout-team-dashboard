@@ -1,4 +1,6 @@
 {
+  "whiteboardPrefix": "\\[layout\\:backlog",
+  "unassignedValue": "---",
   "layoutComponents": [
     "CSS Animations and Transitions",
     "CSS Parsing and Computation",
