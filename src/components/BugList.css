@@ -8,6 +8,8 @@
   width: 100%;
   font-size: 0.875rem;
   border-spacing: 2px;
+  table-layout: fixed;
+  white-space: nowrap;
 }
 
 .bugList thead th {

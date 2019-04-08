@@ -9,11 +9,17 @@ function buildWhiteboardRegex(quarters, targets) {
   if (quarters && quarters.length > 0) {
     unassignedIdx = quarters.indexOf('---');
     if (unassignedIdx > -1) {
-      quarters = quarters.splice(unassignedIdx, 1);
+      quarters.splice(unassignedIdx, 1);
     }
-    regexp += '\\:(' + quarters.join('|') + ')';
-    if (unassignedIdx > -1) {
-      regexp += '?'
+
+    if (quarters.length > 0) {
+      if (unassignedIdx > -1) {
+        regexp += '(';
+      }
+      regexp += '\\:(' + quarters.join('|') + ')';
+      if (unassignedIdx > -1) {
+        regexp += ')?'
+      }
     }
   } else {
     regexp += '(\\:[0-9A-Za-z]+)?';
@@ -23,9 +29,12 @@ function buildWhiteboardRegex(quarters, targets) {
   if (targets && targets.length > 0) {
     unassignedIdx = targets.indexOf('---');
     if (unassignedIdx > -1) {
-      targets = targers.splice(unassignedIdx, 1);
+      targets.splice(unassignedIdx, 1);
     }
-    regexp += '\\:(' + targets.join('|') + ')';
+    regexp += '(\\:(' + targets.join('|') + '))';
+    if (unassignedIdx > -1) {
+      regexp += '?';
+    }
   } else {
     regexp += '(\\:[0-9]+)?';
   }

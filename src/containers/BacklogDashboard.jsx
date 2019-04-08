@@ -31,10 +31,10 @@ const BacklogDashboard = observer(({ store }) => {
             onChange={ selected => updateFilter('assignees', selected) } />
           <QuarterSelectionFilter
             selectedQuarters={ filters.quarters }
-            availableQuarters={ config.quarters.sort() }
+            availableQuarters={ config.quarters.sort().reverse() }
             onChange={ selected => updateFilter('quarters', selected) } />
           <TargetSelectionFilter
-            availableTargets={ config.targets.sort() }
+            availableTargets={ config.targets.sort().reverse() }
             selectedTargets={ filters.targets }
             onChange={ selected => updateFilter('targets', selected) } />
           <div className="controls">
@@ -46,12 +46,12 @@ const BacklogDashboard = observer(({ store }) => {
       <BugList
         bugs={ store.bugs }
         columns={ [
-          { title: 'ID', property: FIELD_ID },
-          { title: 'Summary', property: FIELD_SUMMARY },
-          { title: 'Component', property: FIELD_COMPONENT },
-          { title: 'Assignee', property: bug => bug[FIELD_ASSIGNEE_DETAIL]['nick'] },
-          { title: 'Quarter', property: bug => extractQuarter(bug[FIELD_WHITEBOARD]) },
-          { title: 'Target Release', property: bug => extractTarget(bug[FIELD_WHITEBOARD]) }
+          { title: 'ID', property: FIELD_ID, className: 'id' },
+          { title: 'Summary', property: FIELD_SUMMARY, className: 'summary' },
+          { title: 'Component', property: FIELD_COMPONENT, className: 'component' },
+          { title: 'Assignee', property: bug => bug[FIELD_ASSIGNEE_DETAIL]['nick'], className: 'nick' },
+          { title: 'Quarter', property: bug => extractQuarter(bug[FIELD_WHITEBOARD]), className: 'quarter' },
+          { title: 'Target Release', property: bug => extractTarget(bug[FIELD_WHITEBOARD]), className: 'target' }
         ] } />
     </div>
   )

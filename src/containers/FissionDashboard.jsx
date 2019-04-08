@@ -21,9 +21,9 @@ const FissionDashboard = observer(({ store }) => {
       <BugList
         bugs={ store.bugs }
         columns={ [
-          { title: 'ID', property: FIELD_ID },
-          { title: 'Summary', property: FIELD_SUMMARY },
-          { title: 'Component', property: FIELD_COMPONENT },
+          { title: 'ID', property: FIELD_ID, className: 'id' },
+          { title: 'Summary', property: FIELD_SUMMARY, className: 'summary' },
+          { title: 'Component', property: FIELD_COMPONENT, className: 'component' },
           { title: 'Assignee', property: bug => bug[FIELD_ASSIGNEE_DETAIL]['nick'] },
           { title: 'Milestone', property: FIELD_FISSION_MILESTONE }
         ] } />

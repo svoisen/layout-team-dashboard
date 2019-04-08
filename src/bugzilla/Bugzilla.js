@@ -80,12 +80,6 @@ function searchBugs(query) {
     });
   }
 
-  // if (query.whiteboard && query.whiteboard.length > 0) {
-  //   query.whiteboard.forEach(whiteboard => {
-  //     url.searchParams.append(QUERY_PARAM_WHITEBOARD, whiteboard);
-  //   });
-  // }
-
   if (query.whiteboard) {
     url.searchParams.set(QUERY_PARAM_WHITEBOARD, query.whiteboard);
   }

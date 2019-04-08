@@ -1,7 +1,7 @@
 .app {
   height: 100vh;
   display: grid;
-  grid-template-columns: 200px auto;
+  grid-template-columns: 200px calc(100vw - 200px);
   grid-template-rows: max-content auto max-content;
   grid-template-areas: 
   "header header"
