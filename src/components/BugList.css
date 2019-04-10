@@ -1,7 +1,24 @@
 .bugList {
+  position: relative;
   overflow-y: scroll;
-  height: 200px;
+  height: 100px;
   border: 1px solid black;
+  flex-grow: 1;
+}
+
+.bugList .message {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  width: 200px;
+  margin-left: -100px;
+  background: var(--warm-red);
+  color: white;
+  text-align: center;
+  box-sizing: border-box;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 16px;
 }
 
 .bugList table {

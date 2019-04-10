@@ -9,6 +9,7 @@ import QuarterSelectionFilter from '../components/QuarterSelectionFilter';
 import ComponentSelectionFilter from '../components/ComponentSelectionFilter';
 import AssigneeSelectionFilter from '../components/AssigneeSelectionFilter';
 import TargetSelectionFilter from '../components/TargetSelectionFilter';
+import FilterControls from '../components/FilterControls';
 
 const config = require('../config.json');
 
@@ -37,10 +38,10 @@ const BacklogDashboard = observer(({ store }) => {
             availableTargets={ config.targets.sort().reverse() }
             selectedTargets={ filters.targets }
             onChange={ selected => updateFilter('targets', selected) } />
-          <div className="controls">
-            <button disabled={ !store.filters.dirty } onClick={ applyFilters }>Apply</button>
-            <button className="clear" onClick={ clearFilters }>Clear All</button>
-          </div>
+          <FilterControls
+            applyDisabled={ !store.filters.dirty }
+            onApplyClick={ applyFilters }
+            onClearClick={ clearFilters } />
         </div>
       </details>
       <BugList

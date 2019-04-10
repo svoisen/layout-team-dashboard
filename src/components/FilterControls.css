@@ -1,0 +1,11 @@
+.filterControls {
+  margin-top: 8px;  
+}
+
+.filterControls button {
+  margin-right: 8px;
+}
+
+.filterControls .clear {
+  background: var(--warm-red);
+}

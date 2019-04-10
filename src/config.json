@@ -1,5 +1,6 @@
 {
-  "whiteboardPrefix": "\\[layout\\:backlog",
+  "backlogPrefix": "\\[layout\\:backlog",
+  "quantumFlowPrefix": "\\[qf",
   "unassignedValue": "---",
   "layoutComponents": [
     "CSS Animations and Transitions",

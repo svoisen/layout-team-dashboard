@@ -52,10 +52,6 @@ button:disabled {
   opacity: 0.33;
 }
 
-button.clear {
-  background: var(--warm-red);
-}
-
 .dashboardFilters {
   box-sizing: border-box;
   padding: 8px;
@@ -86,12 +82,10 @@ button.clear {
   margin-bottom: 4px;
 }
 
-.dashboardFilters .controls {
-  margin-top: 8px;
-}
-
-.dashboardFilters .controls button {
-  margin-right: 8px;
+.dashboard {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .dashboard h2 {
@@ -100,11 +94,11 @@ button.clear {
 }
 
 .dashboard .bugList .summary {
-  width: 35%;
+  width: 40%;
 }
 
 .dashboard .bugList .component {
-  width: 25%;
+  width: 20%;
 }
 
 .dashboard .bugList .id {

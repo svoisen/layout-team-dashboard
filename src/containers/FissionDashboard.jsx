@@ -4,6 +4,7 @@ import BugList from '../components/BugList';
 import { FIELD_ID, FIELD_SUMMARY, FIELD_COMPONENT, FIELD_ASSIGNEE_DETAIL, FIELD_FISSION_MILESTONE } from '../bugzilla';
 import AssigneeSelectionFilter from '../components/AssigneeSelectionFilter';
 import MilestoneSelectionFilter from '../components/MilestoneSelectionFilter';
+import FilterControls from '../components/FilterControls';
 
 const config = require('../config.json');
 
@@ -16,6 +17,10 @@ const FissionDashboard = observer(({ store }) => {
         <div className="contents">
           <AssigneeSelectionFilter availableAssignees={ config.team } />
           <MilestoneSelectionFilter availableMilestones={ config.milestones } />
+          <FilterControls
+            applyDisabled={ !store.filters.dirty }
+            onApplyClick={ applyFilters }
+            onClearClick={ clearFilters } />
         </div>
       </details>
       <BugList

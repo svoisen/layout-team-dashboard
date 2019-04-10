@@ -25,7 +25,7 @@ const BugList = observer(({ bugs, columns }) => {
       }
 
       if (typeof column.property === 'string' && (column.property === FIELD_ID || column.property === FIELD_SUMMARY)) {
-        contents = <a href={ makeLink(bug[column.property]) } title={ bug[FIELD_SUMMARY]} >{ bug[column.property] }</a>
+        contents = <a href={ makeLink(bug[FIELD_ID]) } title={ bug[FIELD_SUMMARY]} >{ bug[column.property] }</a>
       } else if (typeof column.property === 'function') {
         contents = column.property(bug);
       } else {
@@ -44,8 +44,11 @@ const BugList = observer(({ bugs, columns }) => {
     );
   });
 
+  const message = bugs.length === 0 ? <div className="message">No bugs found.</div> : '';
+
   return (
     <div className="bugList">
+      { message }
       <table>
         <thead>
           <tr>

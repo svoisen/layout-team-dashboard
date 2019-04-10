@@ -3,9 +3,9 @@ import { FIELD_ID, FIELD_COMPONENT, FIELD_SUMMARY, FIELD_WHITEBOARD, FIELD_ASSIG
 
 const config = require('../config.json');
 
-function buildWhiteboardRegex(quarters, targets) {
+function buildBacklogWhiteboardRegex(quarters, targets) {
   let unassignedIdx = -1;
-  let regexp = config.whiteboardPrefix;
+  let regexp = config.backlogPrefix;
   if (quarters && quarters.length > 0) {
     unassignedIdx = quarters.indexOf('---');
     if (unassignedIdx > -1) {
@@ -50,7 +50,7 @@ function createFetchActions(store) {
     const filters = store.filters;
     const assignees = filters.assignees;
     const components = filters.components.length > 0 ? filters.components : config.layoutComponents;
-    const whiteboard = buildWhiteboardRegex(filters.quarters, filters.targets);
+    const whiteboard = buildBacklogWhiteboardRegex(filters.quarters, filters.targets);
     store.bugs.clear();
 
     searchBugs({
