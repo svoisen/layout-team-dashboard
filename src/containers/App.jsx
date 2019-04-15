@@ -2,8 +2,7 @@ import './App.css';
 import React from 'react';
 import Navigation from './Navigation';
 import Header from '../components/Header';
-import { observer } from 'mobx-react';
-import { Route, Switch } from 'react-router';
+import { Route, Switch, Redirect } from 'react-router';
 import BacklogDashboard from './BacklogDashboard';
 import { ROUTE_BACKLOG, ROUTE_FISSION, ROUTE_WEBCOMPAT, ROUTE_PERFORMANCE } from '../Routes';
 import FissionDashboard from './FissionDashboard';
@@ -18,6 +17,7 @@ const App = ({ store }) => {
       <Header />
       <Navigation router={ router } />
       <main className="content">
+        <Redirect from="/" to={ `/${ROUTE_BACKLOG}` } />
         <Switch>
           <Route path={ `/${ROUTE_BACKLOG}` } component={ () => <BacklogDashboard store={ store } /> } />
           <Route path={ `/${ROUTE_FISSION}` } component={ () => <FissionDashboard store={ store } /> } />
