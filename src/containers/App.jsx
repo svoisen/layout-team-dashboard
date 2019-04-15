@@ -17,8 +17,8 @@ const App = ({ store }) => {
       <Header />
       <Navigation router={ router } />
       <main className="content">
-        <Redirect from="/" to={ `/${ROUTE_BACKLOG}` } />
         <Switch>
+          <Route exact path="/" render={( ) => (<Redirect from="/" to={ `/${ROUTE_BACKLOG}` } />) } />
           <Route path={ `/${ROUTE_BACKLOG}` } component={ () => <BacklogDashboard store={ store } /> } />
           <Route path={ `/${ROUTE_FISSION}` } component={ () => <FissionDashboard store={ store } /> } />
           <Route path={ `/${ROUTE_WEBCOMPAT}` } component={ () => <WebcompatDashboard store={ store } /> } />
