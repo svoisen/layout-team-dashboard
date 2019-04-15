@@ -1,3 +1,8 @@
+const SEARCH_PARAM_QUARTER = 'q';
+const SEARCH_PARAM_ASSIGNEE = 'a';
+const SEARCH_PARAM_COMPONENT = 'c';
+const SEARCH_PARAM_TARGET = 't';
+
 function extractArrayFromSearchParams(params, varName) {
   const arr = params.getAll(varName);
   if (arr) {
@@ -18,11 +23,10 @@ function createFilterActions(store) {
     }
 
     const search = new URLSearchParams();
-    store.filters.quarters.forEach(quarter => search.append('q', quarter));
-    store.filters.assignees.forEach(assignee => search.append('a', assignee));
-    store.filters.components.forEach(component => search.append('c', component));
-    store.filters.targets.forEach(target => search.append('t', target));
-
+    store.filters.quarters.forEach(quarter => search.append(SEARCH_PARAM_QUARTER, quarter));
+    store.filters.assignees.forEach(assignee => search.append(SEARCH_PARAM_ASSIGNEE, assignee));
+    store.filters.components.forEach(component => search.append(SEARCH_PARAM_COMPONENT, component));
+    store.filters.targets.forEach(target => search.append(SEARCH_PARAM_TARGET, target));
     store.filters.dirty = false;
     store.router.push({
       search: '?' + search.toString()
@@ -35,8 +39,9 @@ function createFilterActions(store) {
   }
 
   function updateFiltersFromSearchParams(params) {
-    store.filters.quarters.replace(extractArrayFromSearchParams(params, 'q'));
-    store.filters.assignees.replace(extractArrayFromSearchParams(params, 'a'));
+    store.filters.quarters.replace(extractArrayFromSearchParams(params, SEARCH_PARAM_QUARTER));
+    store.filters.assignees.replace(extractArrayFromSearchParams(params, SEARCH_PARAM_ASSIGNEE));
+    store.filters.components.replace(extractArrayFromSearchParams(params, SEARCH_PARAM_COMPONENT));
   }
 
   function clearFilters() {

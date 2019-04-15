@@ -4,7 +4,7 @@ import React from 'react';
 function Header() {
   return (
     <header className="header">
-      <h1>Firefox Platform Layout Dashboard</h1>
+      <h1>Firefox Platform Layout</h1>
     </header>
   )
 }

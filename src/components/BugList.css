@@ -10,15 +10,20 @@
   position: absolute;
   top: 20%;
   left: 50%;
-  width: 200px;
-  margin-left: -100px;
-  background: var(--warm-red);
-  color: white;
+  width: 320px;
+  margin-left: -160px;
+  background: var(--light-grey);
+  color: black;
   text-align: center;
   box-sizing: border-box;
   border: 1px solid black;
   border-radius: 4px;
   padding: 16px;
+}
+
+.bugList .message.error {
+  background: var(--warm-red);
+  color: white;
 }
 
 .bugList table {

@@ -18,7 +18,7 @@ const BacklogDashboard = observer(({ store }) => {
   const { applyFilters, updateFilter, clearFilters, setFiltersOpen } = createFilterActions(store);
   return (
     <div className="dashboard backlogDashboard">
-      <h2>Backlog</h2>
+      <h2>Backlog Dashboard</h2>
       <details className="dashboardFilters" open={ store.filters.open } onToggle={ event => setFiltersOpen(event.target.open) }>
         <summary className="title">Filters</summary>
         <div className="contents">
@@ -46,6 +46,7 @@ const BacklogDashboard = observer(({ store }) => {
       </details>
       <BugList
         bugs={ store.bugs }
+        status={ store.status.get() }
         columns={ [
           { title: 'ID', property: FIELD_ID, className: 'id' },
           { title: 'Summary', property: FIELD_SUMMARY, className: 'summary' },
