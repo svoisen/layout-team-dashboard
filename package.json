@@ -7,6 +7,10 @@
     "build": "webpack -p --progress --colors",
     "deploy": "npm run build && node node_modules/gh-pages/bin/gh-pages.js -d dist"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/svoisen/layout-team-dashboard.git"
+  },
   "author": "Sean Voisen",
   "license": "MIT",
   "dependencies": {
@@ -27,6 +31,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "css-loader": "^2.1.0",
+    "gh-pages": "^2.0.1",
     "html-webpack-plugin": "^3.2.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.29.5",
