@@ -10,6 +10,7 @@ import ComponentSelectionFilter from '../components/ComponentSelectionFilter';
 import AssigneeSelectionFilter from '../components/AssigneeSelectionFilter';
 import TargetSelectionFilter from '../components/TargetSelectionFilter';
 import FilterControls from '../components/FilterControls';
+import CollapsibleView from '../components/CollapsibleView';
 
 const config = require('../config.json');
 
@@ -19,31 +20,28 @@ const BacklogDashboard = observer(({ store }) => {
   return (
     <div className="dashboard backlogDashboard">
       <h2>Backlog Dashboard</h2>
-      <details className="dashboardFilters" open={ store.filters.open } onToggle={ event => setFiltersOpen(event.target.open) }>
-        <summary className="title">Filters</summary>
-        <div className="contents">
-          <ComponentSelectionFilter
-            availableComponents={ config.layoutComponents.sort() }
-            selectedComponents={ filters.components }
-            onChange={ selected => updateFilter('components', selected) } />
-          <AssigneeSelectionFilter
-            availableAssignees={ config.team.sort() }
-            selectedAssignees={ filters.assignees }
-            onChange={ selected => updateFilter('assignees', selected) } />
-          <QuarterSelectionFilter
-            selectedQuarters={ filters.quarters }
-            availableQuarters={ config.quarters.sort().reverse() }
-            onChange={ selected => updateFilter('quarters', selected) } />
-          <TargetSelectionFilter
-            availableTargets={ config.targets.sort().reverse() }
-            selectedTargets={ filters.targets }
-            onChange={ selected => updateFilter('targets', selected) } />
-          <FilterControls
-            applyDisabled={ !store.filters.dirty }
-            onApplyClick={ applyFilters }
-            onClearClick={ clearFilters } />
-        </div>
-      </details>
+      <CollapsibleView className="dashboardFilters" title="Filters" open={ store.ui.filtersOpen } onToggle={ event => setFiltersOpen(event.target.open) }>
+        <ComponentSelectionFilter
+          availableComponents={ config.layoutComponents.sort() }
+          selectedComponents={ filters.components }
+          onChange={ selected => updateFilter('components', selected) } />
+        <AssigneeSelectionFilter
+          availableAssignees={ config.team.sort() }
+          selectedAssignees={ filters.assignees }
+          onChange={ selected => updateFilter('assignees', selected) } />
+        <QuarterSelectionFilter
+          selectedQuarters={ filters.quarters }
+          availableQuarters={ config.quarters.sort().reverse() }
+          onChange={ selected => updateFilter('quarters', selected) } />
+        <TargetSelectionFilter
+          availableTargets={ config.targets.sort().reverse() }
+          selectedTargets={ filters.targets }
+          onChange={ selected => updateFilter('targets', selected) } />
+        <FilterControls
+          applyDisabled={ !store.filters.dirty }
+          onApplyClick={ applyFilters }
+          onClearClick={ clearFilters } />
+      </CollapsibleView>
       <BugList
         bugs={ store.bugs }
         status={ store.status.get() }

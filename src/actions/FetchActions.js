@@ -63,7 +63,7 @@ function createFetchActions(store) {
     console.log('Fetching backlog');
     const filters = store.filters;
     const assignees = filters.assignees;
-    const components = filters.components.length > 0 ? filters.components : config.layoutComponents;
+    const components = filters.components.length > 0 ? filters.components : undefined;
     const whiteboard = buildBacklogWhiteboardRegex(filters.quarters, filters.targets);
 
     startFetch();

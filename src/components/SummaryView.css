@@ -1,0 +1,7 @@
+.summaryView {
+  display: flex;
+}
+
+.summaryView .item {
+  flex-grow: 1;
+}

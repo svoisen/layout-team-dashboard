@@ -15,7 +15,7 @@ function extractArrayFromSearchParams(params, varName) {
 
 function createFilterActions(store) {
   function setFiltersOpen(open) {
-    store.filters.open = open;
+    store.ui.filtersOpen = open;
   }
 
   function applyFilters() {

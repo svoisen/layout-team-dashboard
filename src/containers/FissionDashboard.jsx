@@ -6,6 +6,8 @@ import AssigneeSelectionFilter from '../components/AssigneeSelectionFilter';
 import MilestoneSelectionFilter from '../components/MilestoneSelectionFilter';
 import FilterControls from '../components/FilterControls';
 import { createFilterActions } from '../actions/FilterActions';
+import SummaryView from '../components/SummaryView';
+import CollapsibleView from '../components/CollapsibleView';
 
 const config = require('../config.json');
 
@@ -15,23 +17,21 @@ const FissionDashboard = observer(({ store }) => {
   return (
     <div className="dashboard fissionDashboard">
       <h2>Fission Dashboard</h2>
-      <details className="dashboardFilters" open={ store.filters.open } onToggle={ event => setFiltersOpen(event.target.open) }>
-        <summary className="title">Filters</summary>
-        <div className="contents">
-          <AssigneeSelectionFilter
-            availableAssignees={ config.team }
-            selectedAssignees={ filters.assignees }
-            onChange={ selected => updateFilter('assignees', selected) } />
-          <MilestoneSelectionFilter
-            availableMilestones={ config.milestones }
-            selectedMilestones={ filters.milestones }
-            onChange={ selected => updateFilter('milestones', selected) } />
-          <FilterControls
-            applyDisabled={ !store.filters.dirty }
-            onApplyClick={ applyFilters }
-            onClearClick={ clearFilters } />
-        </div>
-      </details>
+      <CollapsibleView className="dashboardFilters" title="Filters" open={ store.ui.filtersOpen } onToggle={ event => setFiltersOpen(event.target.open) }>
+        <AssigneeSelectionFilter
+          availableAssignees={ config.team }
+          selectedAssignees={ filters.assignees }
+          onChange={ selected => updateFilter('assignees', selected) } />
+        <MilestoneSelectionFilter
+          availableMilestones={ config.milestones }
+          selectedMilestones={ filters.milestones }
+          onChange={ selected => updateFilter('milestones', selected) } />
+        <FilterControls
+          applyDisabled={ !store.filters.dirty }
+          onApplyClick={ applyFilters }
+          onClearClick={ clearFilters } />
+      </CollapsibleView>
+      <SummaryView bugs={ store.bugs } open={ store.ui.summaryOpen } />
       <BugList
         bugs={ store.bugs }
         status={ store.status.get() }

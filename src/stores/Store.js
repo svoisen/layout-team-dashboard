@@ -10,13 +10,16 @@ function createStore() {
     bugs: observable([]),
     status: observable.box(STATUS_OK),
     filters: observable({
-      open: false,
       dirty: false,
       quarters: [],
       assignees: [],
       targets: [],
       components: [],
       milestones: []
+    }),
+    ui: observable({
+      filtersOpen: false,
+      summaryOpen: false
     }),
     router: new RouterStore()
   };

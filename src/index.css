@@ -52,22 +52,6 @@ button:disabled {
   opacity: 0.33;
 }
 
-.dashboardFilters {
-  box-sizing: border-box;
-  padding: 8px;
-  border: 1px solid black;
-  margin-bottom: 8px;
-}
-
-.dashboardFilters summary {
-  font-family: 'Zilla Slab', serif;
-  font-size: 1.2rem;
-}
-
-.dashboardFilters .contents {
-  margin-top: 8px;
-}
-
 .dashboardFilters .filter {
   display: inline-block;
   margin-right: 8px;
