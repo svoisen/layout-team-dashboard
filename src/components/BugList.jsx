@@ -3,20 +3,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
 import { FIELD_ID, FIELD_IS_OPEN, FIELD_SUMMARY, STATUS_NEW } from '../bugzilla/Constants';
-import { STATUS_FETCHING, STATUS_ERROR, STATUS_OK } from '../stores/Store';
+import { FETCH_STATUS_FETCHING, FETCH_STATUS_ERROR } from '../stores/Store';
 
 function makeLink(bugId) {
   return `https://bugzilla.mozilla.org/show_bug.cgi?id=${bugId}`;
 }
 
 function renderMessage(bugs, status) {
-  if (status === STATUS_FETCHING) {
+  if (status === FETCH_STATUS_FETCHING) {
     return (
       <div className="message">Fetching bugs &hellip;</div>
     );
   }
 
-  if (status === STATUS_ERROR) {
+  if (status === FETCH_STATUS_ERROR) {
     return (
       <div className="message error">Error fetching bugs from BMO.</div>
     )

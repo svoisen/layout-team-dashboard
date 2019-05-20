@@ -8,6 +8,8 @@ import FilterControls from '../components/FilterControls';
 import { createFilterActions } from '../actions/FilterActions';
 import SummaryView from '../components/SummaryView';
 import CollapsibleView from '../components/CollapsibleView';
+import CompletionFilter from '../components/CompletionFilter';
+import { COMPLETION_ANY, COMPLETION_COMPLETE, COMPLETION_INCOMPLETE } from '../stores/Store';
 
 const config = require('../config.json');
 
@@ -26,6 +28,12 @@ const FissionDashboard = observer(({ store }) => {
           availableMilestones={ config.milestones }
           selectedMilestones={ filters.milestones }
           onChange={ selected => updateFilter('milestones', selected) } />
+        <CompletionFilter
+          anyValue={ COMPLETION_ANY }
+          completeValue={ COMPLETION_COMPLETE }
+          incompleteValue={ COMPLETION_INCOMPLETE }
+          selectedValue={ filters.completionStatus } 
+          onChange={ selected => updateFilter('completionStatus', selected) } />
         <FilterControls
           applyDisabled={ !store.filters.dirty }
           onApplyClick={ applyFilters }

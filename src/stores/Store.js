@@ -1,21 +1,26 @@
 import { RouterStore } from 'mobx-react-router';
 import { observable } from '../../node_modules/mobx/lib/mobx';
 
-const STATUS_OK = 'ok';
-const STATUS_FETCHING = 'fetching';
-const STATUS_ERROR = 'error';
+const FETCH_STATUS_OK = 'ok';
+const FETCH_STATUS_FETCHING = 'fetching';
+const FETCH_STATUS_ERROR = 'error';
+
+const COMPLETION_ANY = 'any';
+const COMPLETION_COMPLETE = 'complete';
+const COMPLETION_INCOMPLETE = 'incomplete';
 
 function createStore() {
   return {
     bugs: observable([]),
-    status: observable.box(STATUS_OK),
+    status: observable.box(FETCH_STATUS_OK),
     filters: observable({
       dirty: false,
       quarters: [],
       assignees: [],
       targets: [],
       components: [],
-      milestones: []
+      milestones: [],
+      completionStatus: COMPLETION_ANY
     }),
     ui: observable({
       filtersOpen: false,
@@ -27,7 +32,10 @@ function createStore() {
 
 export {
   createStore,
-  STATUS_OK,
-  STATUS_ERROR,
-  STATUS_FETCHING
+  FETCH_STATUS_OK,
+  FETCH_STATUS_ERROR,
+  FETCH_STATUS_FETCHING,
+  COMPLETION_ANY,
+  COMPLETION_COMPLETE,
+  COMPLETION_INCOMPLETE
 }

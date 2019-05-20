@@ -1,6 +1,6 @@
 import { searchBugs, fetchBugDependencies } from '../bugzilla/Bugzilla';
 import { FIELD_ID, FIELD_COMPONENT, FIELD_SUMMARY, FIELD_WHITEBOARD, FIELD_ASSIGNEE_DETAIL, FIELD_ASSIGNEE, FIELD_IS_OPEN, FIELD_FISSION_MILESTONE } from '../bugzilla/Constants';
-import { STATUS_ERROR, STATUS_OK, STATUS_FETCHING } from '../stores/Store';
+import { FETCH_STATUS_ERROR, FETCH_STATUS_OK, FETCH_STATUS_FETCHING } from '../stores/Store';
 
 const config = require('../config.json');
 
@@ -48,14 +48,14 @@ function buildBacklogWhiteboardRegex(quarters, targets) {
 function createFetchActions(store) {
   function startFetch() {
     store.bugs.clear();
-    store.status.set(STATUS_FETCHING);
+    store.status.set(FETCH_STATUS_FETCHING);
   }
 
   function endFetch(error) {
     if (error) {
-      store.status.set(STATUS_ERROR);
+      store.status.set(FETCH_STATUS_ERROR);
     } else {
-      store.status.set(STATUS_OK);
+      store.status.set(FETCH_STATUS_OK);
     }
   }
 
@@ -64,7 +64,9 @@ function createFetchActions(store) {
     const filters = store.filters;
     const assignees = filters.assignees;
     const components = filters.components.length > 0 ? filters.components : undefined;
+    const completionStatus = filters.completionStatus;
     const whiteboard = buildBacklogWhiteboardRegex(filters.quarters, filters.targets);
+    const isOpen =
 
     startFetch();
     searchBugs({

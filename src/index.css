@@ -52,16 +52,22 @@ button:disabled {
   opacity: 0.33;
 }
 
-.dashboardFilters .filter {
+.filter {
   display: inline-block;
   margin-right: 8px;
+  min-width: 160px;
+  vertical-align: top;
 }
 
-.dashboardFilters .filter label {
+.filter select {
+  width: 100%;
+}
+
+.filter label {
   font-size: 0.875rem;
 }
 
-.dashboardFilters .filter__vertical label {
+.filter__vertical label {
   display: block;
   margin-bottom: 4px;
 }
