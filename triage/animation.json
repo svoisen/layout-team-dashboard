@@ -1,0 +1,13 @@
+{
+  "triagers": {
+    "Hiro Ikezoe": {
+      "bzmail": "hikezoe@mozilla.com"
+    },
+    "Boris Chiou": {
+      "bzmail": "boris.chiou@gmail.com"
+    },
+    "Brian Birtles": {
+      "bzmail": "bbirtles@mozilla.com"
+    }
+  }
+}
