@@ -1,0 +1,16 @@
+{
+  "triagers": {
+    "Daniel Holbert": {
+      "bzmail": "dholbert@mozilla.com"
+    },
+    "Mats Palmgren": {
+      "bzmail": "mats@mozilla.com"
+    },
+    "David Baron": {
+      "bzmail": "dbaron@dbaron.org"
+    },
+    "Jonathan Watt": {
+      "bzmail": "jwatt@jwatt.org"
+    }
+  }
+}

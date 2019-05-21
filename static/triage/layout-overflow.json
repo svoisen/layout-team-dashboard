@@ -1,0 +1,16 @@
+{
+  "triagers": {
+    "Daniel Holbert": {
+      "bzmail": "dholbert@mozilla.com"
+    },
+    "Hiro Ikezoe": {
+      "bzmail": "hikezoe@mozilla.com"
+    },
+    "Mats Palmgren": {
+      "bzmail": "mats@mozilla.com"
+    },
+    "Ting-Yu Lin": {
+      "bzmail": "aethanyc@gmail.com"
+    }
+  }
+}

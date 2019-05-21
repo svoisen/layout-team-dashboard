@@ -1,0 +1,10 @@
+{
+  "triagers": {
+    "Daniel Holbert": {
+      "bzmail": "dholbert@mozilla.com"
+    },
+    "Jonathan Watt": {
+      "bzmail": "jwatt@jwatt.org"
+    }
+  }
+}

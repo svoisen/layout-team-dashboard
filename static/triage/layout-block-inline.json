@@ -1,0 +1,19 @@
+{
+  "triagers": {
+    "Jonathan Kew": {
+      "bzmail": "jfkthame@gmail.com"
+    },
+    "Daniel Holbert": {
+      "bzmail": "dholbert@mozilla.com"
+    },
+    "Mats Palmgren": {
+      "bzmail": "mats@mozilla.com"
+    },
+    "David Baron": {
+      "bzmail": "dbaron@dbaron.org"
+    },
+    "Emilio Cobos Alvarez": {
+      "bzmail": "emilio@crisal.io"
+    }
+  }
+}
