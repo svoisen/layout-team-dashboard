@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const isProduction = process.argv.indexOf('-p') >= 0;
 
@@ -28,7 +29,10 @@ module.exports = {
         chunksSortMode: 'manual',
         chunks: ['vendor', 'bundle']
       }
-    })
+    }),
+    new CopyWebpackPlugin([
+      { from: 'static' }
+    ])
   ],
   resolve: {
     extensions: ['.js', '.jsx']
