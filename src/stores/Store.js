@@ -1,5 +1,6 @@
 import { RouterStore } from 'mobx-react-router';
 import { observable } from '../../node_modules/mobx/lib/mobx';
+import { FIELD_ID } from '../bugzilla/Constants';
 
 const FETCH_STATUS_OK = 'ok';
 const FETCH_STATUS_FETCHING = 'fetching';
@@ -9,10 +10,15 @@ const COMPLETION_ANY = 'any';
 const COMPLETION_COMPLETE = 'complete';
 const COMPLETION_INCOMPLETE = 'incomplete';
 
+const SORT_ASC = 'asc';
+const SORT_DESC = 'desc';
+
 function createStore() {
   return {
     bugs: observable([]),
     status: observable.box(FETCH_STATUS_OK),
+    sortOrder: SORT_DESC,
+    sortField: FIELD_ID,
     filters: observable({
       dirty: false,
       quarters: [],
@@ -37,5 +43,7 @@ export {
   FETCH_STATUS_FETCHING,
   COMPLETION_ANY,
   COMPLETION_COMPLETE,
-  COMPLETION_INCOMPLETE
+  COMPLETION_INCOMPLETE,
+  SORT_ASC,
+  SORT_DESC
 }

@@ -1,6 +1,6 @@
 import { searchBugs, fetchBugDependencies } from '../bugzilla/Bugzilla';
 import { FIELD_ID, FIELD_COMPONENT, FIELD_SUMMARY, FIELD_WHITEBOARD, FIELD_ASSIGNEE_DETAIL, FIELD_ASSIGNEE, FIELD_IS_OPEN, FIELD_FISSION_MILESTONE, STATUS_NEW, STATUS_ASSIGNED, STATUS_UNCONFIRMED, STATUS_RESOLVED, STATUS_REOPENED } from '../bugzilla/Constants';
-import { FETCH_STATUS_ERROR, FETCH_STATUS_OK, FETCH_STATUS_FETCHING, COMPLETION_COMPLETE } from '../stores/Store';
+import { FETCH_STATUS_ERROR, FETCH_STATUS_OK, FETCH_STATUS_FETCHING, COMPLETION_COMPLETE, SORT_ASC } from '../stores/Store';
 
 const config = require('../config.json');
 
@@ -81,6 +81,21 @@ function createFetchActions(store) {
       assignees: assignees,
       statuses: isOpen ? [STATUS_NEW, STATUS_ASSIGNED, STATUS_UNCONFIRMED, STATUS_ASSIGNED, STATUS_REOPENED] : [STATUS_RESOLVED]
     }).then(data => {
+      data.bugs.sort((a, b) => {
+        const valA = a[store.sortField];
+        const valB = b[store.sortField];
+
+        if (valA > valB) {
+          return store.sortOrder === SORT_ASC ? 1 : -1;
+        }
+
+        if (valA < valB) {
+          return store.sortOrder === SORT_ASC ? -1 : 1;
+        }
+
+        return 0;
+      });
+
       store.bugs.replace(data.bugs);
       endFetch();
     }).catch(error => {
