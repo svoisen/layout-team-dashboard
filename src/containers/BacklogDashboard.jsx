@@ -11,6 +11,8 @@ import AssigneeSelectionFilter from '../components/AssigneeSelectionFilter';
 import TargetSelectionFilter from '../components/TargetSelectionFilter';
 import FilterControls from '../components/FilterControls';
 import CollapsibleView from '../components/CollapsibleView';
+import CompletionFilter from '../components/CompletionFilter';
+import { COMPLETION_ANY, COMPLETION_COMPLETE, COMPLETION_INCOMPLETE } from '../stores/Store';
 
 const config = require('../config.json');
 
@@ -37,6 +39,12 @@ const BacklogDashboard = observer(({ store }) => {
           availableTargets={ config.targets.sort().reverse() }
           selectedTargets={ filters.targets }
           onChange={ selected => updateFilter('targets', selected) } />
+        <CompletionFilter
+          anyValue={ COMPLETION_ANY }
+          completeValue={ COMPLETION_COMPLETE }
+          incompleteValue={ COMPLETION_INCOMPLETE }
+          selectedValue={ filters.completionStatus }
+          onChange={ selected => updateFilter('completionStatus', selected) } />
         <FilterControls
           applyDisabled={ !store.filters.dirty }
           onApplyClick={ applyFilters }

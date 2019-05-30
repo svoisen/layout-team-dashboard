@@ -5,6 +5,7 @@ const QUERY_PARAM_COMPONENT = 'component';
 const QUERY_PARAM_WHITEBOARD = 'whiteboard';
 const QUERY_PARAM_WHITEBOARD_TYPE = 'status_whiteboard_type';
 const QUERY_PARAM_ASSIGNEE = 'assigned_to';
+const QUERY_PARAM_STATUS = 'status';
 
 function parseJSON(response) {
   return response.json();
@@ -82,6 +83,12 @@ function searchBugs(query) {
 
   if (query.whiteboard) {
     url.searchParams.set(QUERY_PARAM_WHITEBOARD, query.whiteboard);
+  }
+
+  if (query.statuses) {
+    query.statuses.forEach(status => {
+      url.searchParams.append(QUERY_PARAM_STATUS, status);
+    });
   }
 
   url.searchParams.append(QUERY_PARAM_WHITEBOARD_TYPE, 'regexp');

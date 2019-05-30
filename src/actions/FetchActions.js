@@ -1,5 +1,5 @@
 import { searchBugs, fetchBugDependencies } from '../bugzilla/Bugzilla';
-import { FIELD_ID, FIELD_COMPONENT, FIELD_SUMMARY, FIELD_WHITEBOARD, FIELD_ASSIGNEE_DETAIL, FIELD_ASSIGNEE, FIELD_IS_OPEN, FIELD_FISSION_MILESTONE } from '../bugzilla/Constants';
+import { FIELD_ID, FIELD_COMPONENT, FIELD_SUMMARY, FIELD_WHITEBOARD, FIELD_ASSIGNEE_DETAIL, FIELD_ASSIGNEE, FIELD_IS_OPEN, FIELD_FISSION_MILESTONE, STATUS_NEW, STATUS_ASSIGNED, STATUS_UNCONFIRMED, STATUS_RESOLVED, STATUS_REOPENED } from '../bugzilla/Constants';
 import { FETCH_STATUS_ERROR, FETCH_STATUS_OK, FETCH_STATUS_FETCHING, COMPLETION_COMPLETE } from '../stores/Store';
 
 const config = require('../config.json');
@@ -78,7 +78,8 @@ function createFetchActions(store) {
       fields: [FIELD_ID, FIELD_COMPONENT, FIELD_SUMMARY, FIELD_WHITEBOARD, FIELD_ASSIGNEE, FIELD_ASSIGNEE_DETAIL, FIELD_IS_OPEN],
       components: components,
       whiteboard: whiteboard,
-      assignees: assignees
+      assignees: assignees,
+      statuses: isOpen ? [STATUS_NEW, STATUS_ASSIGNED, STATUS_UNCONFIRMED, STATUS_ASSIGNED, STATUS_REOPENED] : [STATUS_RESOLVED]
     }).then(data => {
       store.bugs.replace(data.bugs);
       endFetch();
