@@ -1,6 +1,6 @@
 import { searchBugs, fetchBugDependencies } from '../bugzilla/Bugzilla';
 import { FIELD_ID, FIELD_COMPONENT, FIELD_SUMMARY, FIELD_WHITEBOARD, FIELD_ASSIGNEE_DETAIL, FIELD_ASSIGNEE, FIELD_IS_OPEN, FIELD_FISSION_MILESTONE, STATUS_NEW, STATUS_ASSIGNED, STATUS_UNCONFIRMED, STATUS_RESOLVED, STATUS_REOPENED } from '../bugzilla/Constants';
-import { FETCH_STATUS_ERROR, FETCH_STATUS_OK, FETCH_STATUS_FETCHING, COMPLETION_COMPLETE } from '../stores/Store';
+import { FETCH_STATUS_ERROR, FETCH_STATUS_OK, FETCH_STATUS_FETCHING, COMPLETION_COMPLETE, COMPLETION_INCOMPLETE } from '../stores/Store';
 import { createSortActions } from './SortActions';
 
 const config = require('../config.json');
@@ -66,12 +66,19 @@ function createFetchActions(store) {
     const assignees = filters.assignees;
     const components = filters.components.length > 0 ? filters.components : undefined;
     const whiteboard = buildBacklogWhiteboardRegex(filters.quarters, filters.targets);
-    const isOpen = (() => {
-      if (filters.completionStatus !== undefined) {
-        return filters.completionStatus === COMPLETION_COMPLETE ? false : true;
+    const statuses = (() => {
+      const closedStatuses = [STATUS_RESOLVED];
+      const openStatuses = [STATUS_NEW, STATUS_ASSIGNED, STATUS_UNCONFIRMED, STATUS_ASSIGNED, STATUS_REOPENED];
+
+      if (filters.completionStatus === COMPLETION_COMPLETE) {
+        return closedStatuses;
       }
 
-      return undefined;
+      if (filters.completionStatus === COMPLETION_INCOMPLETE) {
+        return openStatuses;
+      }
+
+      return closedStatuses.concat(openStatuses);
     })();
     const { sort } = createSortActions(store);
 
@@ -81,7 +88,7 @@ function createFetchActions(store) {
       components: components,
       whiteboard: whiteboard,
       assignees: assignees,
-      statuses: isOpen ? [STATUS_NEW, STATUS_ASSIGNED, STATUS_UNCONFIRMED, STATUS_ASSIGNED, STATUS_REOPENED] : [STATUS_RESOLVED]
+      statuses: statuses,
     }).then(data => {
       const sorted = sort(data.bugs);
       store.bugs.replace(sorted);
