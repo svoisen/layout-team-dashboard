@@ -13,12 +13,15 @@ import FilterControls from '../components/FilterControls';
 import CollapsibleView from '../components/CollapsibleView';
 import CompletionFilter from '../components/CompletionFilter';
 import { COMPLETION_ANY, COMPLETION_COMPLETE, COMPLETION_INCOMPLETE } from '../stores/Store';
+import { createSortActions } from '../actions/SortActions';
 
 const config = require('../config.json');
 
 const BacklogDashboard = observer(({ store }) => {
   const filters = store.filters;
   const { applyFilters, updateFilter, clearFilters, setFiltersOpen } = createFilterActions(store);
+  const { setSortField  } = createSortActions(store);
+
   return (
     <div className="dashboard backlogDashboard">
       <h2>Backlog Dashboard</h2>
@@ -53,13 +56,14 @@ const BacklogDashboard = observer(({ store }) => {
       <BugList
         bugs={ store.bugs }
         status={ store.status.get() }
+        onHeaderClick={ (field, valueFn) => setSortField(field, valueFn) }
         columns={ [
-          { title: 'ID', property: FIELD_ID, className: 'id' },
-          { title: 'Summary', property: FIELD_SUMMARY, className: 'summary' },
-          { title: 'Component', property: FIELD_COMPONENT, className: 'component' },
-          { title: 'Assignee', property: bug => bug[FIELD_ASSIGNEE_DETAIL]['nick'], className: 'nick' },
-          { title: 'Quarter', property: bug => extractQuarter(bug[FIELD_WHITEBOARD]), className: 'quarter' },
-          { title: 'Target Release', property: bug => extractTarget(bug[FIELD_WHITEBOARD]), className: 'target' }
+          { title: 'ID', field: FIELD_ID, value: bug => bug[FIELD_ID], className: 'id' },
+          { title: 'Summary', field: FIELD_SUMMARY, value: bug => bug[FIELD_SUMMARY], className: 'summary' },
+          { title: 'Component', field: FIELD_COMPONENT, value: bug => bug[FIELD_COMPONENT], className: 'component' },
+          { title: 'Assignee', field: 'assignee', value: bug => bug[FIELD_ASSIGNEE_DETAIL]['nick'], className: 'nick' },
+          { title: 'Quarter', field: 'quarter', value: bug => extractQuarter(bug[FIELD_WHITEBOARD]), className: 'quarter' },
+          { title: 'Target Release', field: 'target', property: bug => extractTarget(bug[FIELD_WHITEBOARD]), className: 'target' }
         ] } />
     </div>
   )

@@ -31,10 +31,10 @@ function renderMessage(bugs, status) {
   return '';
 }
 
-const BugList = observer(({ bugs, columns, status }) => {
+const BugList = observer(({ bugs, columns, status, onHeaderClick }) => {
   const headers = columns.map((column, idx) => {
     return (
-      <th className={ column.className } key={ `column_${idx}` }>{ column.title }</th>
+      <th className={ column.className } key={ `column_${idx}` } onClick={ () => onHeaderClick(column.field, column.value) }>{ column.title }</th>
     )
   });
 
@@ -48,12 +48,12 @@ const BugList = observer(({ bugs, columns, status }) => {
         classNames.push('closed');
       }
 
-      if (typeof column.property === 'string' && (column.property === FIELD_ID || column.property === FIELD_SUMMARY)) {
-        contents = <a href={ makeLink(bug[FIELD_ID]) } title={ bug[FIELD_SUMMARY]} >{ bug[column.property] }</a>
-      } else if (typeof column.property === 'function') {
-        contents = column.property(bug);
+      if (column.field === FIELD_ID || column.field === FIELD_SUMMARY) {
+        contents = <a href={ makeLink(bug[FIELD_ID]) } title={ bug[FIELD_SUMMARY]} >{ column.value(bug) }</a>
+      } else if (typeof column.value === 'function') {
+        contents = column.value(bug);
       } else {
-        contents = bug[column.property];
+        contents = bug[column.field];
       }
 
       return (
