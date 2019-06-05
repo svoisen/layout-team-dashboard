@@ -14,6 +14,7 @@ import CollapsibleView from '../components/CollapsibleView';
 import CompletionFilter from '../components/CompletionFilter';
 import { COMPLETION_ANY, COMPLETION_COMPLETE, COMPLETION_INCOMPLETE } from '../stores/Store';
 import { createSortActions } from '../actions/SortActions';
+import SummaryView from '../components/SummaryView';
 
 const config = require('../config.json');
 
@@ -53,6 +54,9 @@ const BacklogDashboard = observer(({ store }) => {
           onApplyClick={ applyFilters }
           onClearClick={ clearFilters } />
       </CollapsibleView>
+      <SummaryView
+        bugs={ store.bugs }
+        open={ store.ui.summaryOpen } />
       <BugList
         bugs={ store.bugs }
         status={ store.status.get() }

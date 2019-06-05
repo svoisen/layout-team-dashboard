@@ -1,16 +1,13 @@
 import React from 'react';
+import './SummaryView.css';
 import { observer } from 'mobx-react';
-import { FIELD_IS_OPEN } from '../bugzilla/index';
 import CollapsibleView from './CollapsibleView';
+import PercentCompleteSummary from './PercentCompleteSummary';
 
 const SummaryView = observer(({ bugs, open, onToggle }) => {
-  const percentComplete = (bugs.filter(bug => !bug[FIELD_IS_OPEN]).length / bugs.length) * 100;
-
   return (
     <CollapsibleView title="Summary" open={ open } onToggle={ onToggle }>
-      <div className="item">
-        <h3>{ percentComplete }%<br />Complete</h3>
-      </div>
+      <PercentCompleteSummary bugs={ bugs } />
     </CollapsibleView>
   );
 });
