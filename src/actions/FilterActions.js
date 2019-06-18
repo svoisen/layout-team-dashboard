@@ -26,10 +26,6 @@ function valueFromSearchParams(params, varName, defaultVal) {
 }
 
 function createFilterActions(store) {
-  function setFiltersOpen(open) {
-    store.ui.filtersOpen = open;
-  }
-
   function applyFilters() {
     if (!store.filters.dirty) {
       return;
@@ -74,8 +70,7 @@ function createFilterActions(store) {
     updateFiltersFromSearchParams,
     updateFilter,
     applyFilters,
-    clearFilters,
-    setFiltersOpen
+    clearFilters
   }
 }
 

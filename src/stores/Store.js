@@ -19,6 +19,12 @@ function createStore() {
     status: observable.box(FETCH_STATUS_OK),
     sortOrder: SORT_DESC,
     sortField: FIELD_ID,
+    charting: {
+      burndown: observable({
+        needsUpdate: true,
+        data: {}
+      })
+    },
     filters: observable({
       dirty: false,
       quarters: [],

@@ -10,12 +10,14 @@ import SummaryView from '../components/SummaryView';
 import CollapsibleView from '../components/CollapsibleView';
 import CompletionFilter from '../components/CompletionFilter';
 import { COMPLETION_ANY, COMPLETION_COMPLETE, COMPLETION_INCOMPLETE } from '../stores/Store';
+import { createUIActions } from '../actions/UIActions';
 
 const config = require('../config.json');
 
 const FissionDashboard = observer(({ store }) => {
   const filters = store.filters;
-  const { applyFilters, updateFilter, clearFilters, setFiltersOpen } = createFilterActions(store);
+  const { applyFilters, updateFilter, clearFilters } = createFilterActions(store);
+  const { setFiltersOpen, setSummaryOpen } = createUIActions(store);
   return (
     <div className="dashboard fissionDashboard">
       <h2>Fission Dashboard</h2>
@@ -39,7 +41,10 @@ const FissionDashboard = observer(({ store }) => {
           onApplyClick={ applyFilters }
           onClearClick={ clearFilters } />
       </CollapsibleView>
-      <SummaryView bugs={ store.bugs } open={ store.ui.summaryOpen } />
+      <SummaryView
+        bugs={ store.bugs }
+        open={ store.ui.summaryOpen }
+        onToggle={ event => setSummaryOpen(event.target.open) } />
       <BugList
         bugs={ store.bugs }
         status={ store.status.get() }

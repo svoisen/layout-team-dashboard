@@ -1,7 +1,9 @@
-.summaryView {
-  display: flex;
+.summaryView .contents {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-.summaryView .item {
-  flex-grow: 1;
+.summaryView .summaryItem .title {
+  text-align: center;
+  font-weight: bold;
 }

@@ -13,13 +13,13 @@ const PercentCompleteSummary = observer(({ bugs }) => {
     startAngle: 270,
     total: bugs.length * 2,
     donutWidth: 20,
-    showLabel: false
-  }
+    showLabel: false,
+  };
 
   return (
-    <div className="summaryItem">
+    <div className="percentCompleteSummary summaryItem">
       <ChartistGraph data={ { series: series } } options={ options } type={ 'Pie' } />
-      <div>{ percentComplete }% Complete</div>
+      <div class="title">{ percentComplete }% Complete</div>
     </div>
   );
 });

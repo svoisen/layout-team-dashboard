@@ -7,6 +7,7 @@ const FIELD_ASSIGNEE = 'assigned_to';
 const FIELD_ASSIGNEE_DETAIL = 'assigned_to_detail';
 const FIELD_FLAGS = 'flags';
 const FIELD_FISSION_MILESTONE = 'cf_fission_milestone';
+const FIELD_LAST_RESOLVED = 'cf_last_resolved';
 const STATUS_NEW = 'NEW';
 const STATUS_ASSIGNED = 'ASSIGNED';
 const STATUS_REOPENED = 'REOPENED';

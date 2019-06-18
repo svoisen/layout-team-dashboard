@@ -3,11 +3,13 @@ import './SummaryView.css';
 import { observer } from 'mobx-react';
 import CollapsibleView from './CollapsibleView';
 import PercentCompleteSummary from './PercentCompleteSummary';
+import BurndownSummary from './BurndownSummary';
 
 const SummaryView = observer(({ bugs, open, onToggle }) => {
   return (
-    <CollapsibleView title="Summary" open={ open } onToggle={ onToggle }>
+    <CollapsibleView className="summaryView" title="Summary" open={ open } onToggle={ onToggle }>
       <PercentCompleteSummary bugs={ bugs } />
+      <BurndownSummary bugs={ bugs } />
     </CollapsibleView>
   );
 });
