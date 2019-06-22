@@ -57,6 +57,7 @@ const BacklogDashboard = observer(({ store }) => {
           onClearClick={ clearFilters } />
       </CollapsibleView>
       <SummaryView
+        dataFetchStatus={ store.status }
         bugs={ store.bugs }
         open={ store.ui.summaryOpen } />
       <BugList

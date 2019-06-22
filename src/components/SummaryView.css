@@ -1,9 +1,24 @@
 .summaryView .contents {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-gap: 8px;
+}
+
+.summaryView .summaryItem {
+  border: 1px solid var(--light-grey);
+  height: 200px;
+}
+
+.summaryView .summaryItem.loading {
+  display: flex;
+  align-items: center;
 }
 
 .summaryView .summaryItem .title {
   text-align: center;
-  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.summaryView .summaryItem .ct-chart {
+  margin-top: 8px;
 }

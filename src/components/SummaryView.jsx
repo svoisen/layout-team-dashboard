@@ -5,11 +5,19 @@ import CollapsibleView from './CollapsibleView';
 import PercentCompleteSummary from './PercentCompleteSummary';
 import BurndownSummary from './BurndownSummary';
 
-const SummaryView = observer(({ bugs, open, onToggle }) => {
-  return (
-    <CollapsibleView className="summaryView" title="Summary" open={ open } onToggle={ onToggle }>
-      <PercentCompleteSummary bugs={ bugs } />
-      <BurndownSummary bugs={ bugs } />
+const SummaryView = observer(({ bugs, open, onToggle, dataFetchStatus }) => {
+return (
+    <CollapsibleView
+      className="summaryView"
+      title="Summary"
+      open={ open }
+      onToggle={ onToggle }>
+      <PercentCompleteSummary
+        dataFetchStatus={ dataFetchStatus }
+        bugs={ bugs } />
+      <BurndownSummary
+        dataFetchStatus={ dataFetchStatus }
+        bugs={ bugs } />
     </CollapsibleView>
   );
 });

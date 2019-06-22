@@ -41,6 +41,7 @@
 .bugList thead th, .bugList tbody th {
   position: sticky;
   top: 2px;
+  padding: 4px;
 }
 
 .bugList tbody tr:nth-child(even) {
