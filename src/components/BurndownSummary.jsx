@@ -5,17 +5,25 @@ import './BurndownSummary.css';
 import { FETCH_STATUS_FETCHING } from '../stores/Store';
 import Loader from './Loader';
 
-const BurndownSummary = observer(({ dataFetchStatus }) => {
+const BurndownSummary = observer(({ bugs, dataFetchStatus }) => {
   const classNames = ['burndownSummary', 'summaryItem'];
   const status = dataFetchStatus.get();
   if (status === FETCH_STATUS_FETCHING) {
     classNames.push('loading');
   }
 
+  if (bugs.length === 0) {
+    classNames.push('nodata');
+  }
+
   const content = ((status) => {
     if (status === FETCH_STATUS_FETCHING) {
       return <Loader />;
     } 
+
+    if (bugs.length === 0) {
+      return (<div>No data</div>);
+    }
 
     const series = [[9, 5, 7, 8, 2, 1]];
     const labels = [1, 2, 3, 4];

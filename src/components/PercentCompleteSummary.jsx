@@ -12,9 +12,17 @@ const PercentCompleteSummary = observer(({ bugs, dataFetchStatus }) => {
     classNames.push('loading');
   }
 
+  if (bugs.length === 0) {
+    classNames.push('nodata');
+  }
+
   const content = ((status) => {
     if (status === FETCH_STATUS_FETCHING) {
       return <Loader />;
+    }
+
+    if (bugs.length === 0) {
+      return (<div>No data</div>);
     }
 
     const numOpen = bugs.filter(bug => bug[FIELD_IS_OPEN]).length;

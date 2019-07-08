@@ -9,9 +9,16 @@
   height: 200px;
 }
 
-.summaryView .summaryItem.loading {
+.summaryView .summaryItem.loading, .summaryView .summaryItem.nodata {
   display: flex;
   align-items: center;
+}
+
+.summaryView .summaryItem.nodata > div {
+  margin: 0 auto;
+  color: var(--light-grey);
+  text-transform: uppercase;
+  text-align: center;
 }
 
 .summaryView .summaryItem .title {

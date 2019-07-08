@@ -7,7 +7,7 @@ import { Router } from 'react-router';
 import { createHashHistory } from 'history';
 import { createStore } from './stores/Store';
 import { syncHistoryWithStore } from 'mobx-react-router';
-import { autorun, reaction } from '../node_modules/mobx/lib/mobx';
+import { reaction } from 'mobx';
 import { ROUTE_BACKLOG, ROUTE_FISSION } from './Routes';
 import { createFetchActions } from './actions/FetchActions';
 import { createFilterActions } from './actions/FilterActions';

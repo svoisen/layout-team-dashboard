@@ -13,7 +13,13 @@ const COMPLETION_INCOMPLETE = 'incomplete';
 const SORT_ASC = 'asc';
 const SORT_DESC = 'desc';
 
+const SESSION_UI_FILTERS_OPEN = 'ui.filtersOpen';
+const SESSION_UI_SUMMARY_OPEN = 'ui.summaryOpen';
+
 function createStore() {
+  const filtersOpen = sessionStorage.getItem(SESSION_UI_FILTERS_OPEN);
+  const summaryOpen = sessionStorage.getItem(SESSION_UI_SUMMARY_OPEN);
+
   return {
     bugs: observable([]),
     status: observable.box(FETCH_STATUS_OK),
@@ -35,8 +41,8 @@ function createStore() {
       completionStatus: COMPLETION_ANY
     }),
     ui: observable({
-      filtersOpen: false,
-      summaryOpen: false
+      filtersOpen: filtersOpen || false,
+      summaryOpen: summaryOpen || false
     }),
     router: new RouterStore()
   };
@@ -51,5 +57,7 @@ export {
   COMPLETION_COMPLETE,
   COMPLETION_INCOMPLETE,
   SORT_ASC,
-  SORT_DESC
+  SORT_DESC,
+  SESSION_UI_FILTERS_OPEN,
+  SESSION_UI_SUMMARY_OPEN
 }
